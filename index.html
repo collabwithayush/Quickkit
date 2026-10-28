@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="QuickKit offers free, simple online tools including a percentage calculator, word counter and unit converter.">
+<meta name="theme-color" content="#10233f">
+<title>QuickKit — Free Online Tools</title>
+<style>
+:root{--navy:#10233f;--mint:#67e8c1;--ink:#182438;--muted:#64748b;--line:#e2e8f0;--paper:#f6f8fb;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+header{background:var(--navy);color:white;padding:22px 18px 42px}.wrap{max-width:980px;margin:auto}.nav{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.25rem}.logo{background:var(--mint);color:var(--navy);border-radius:12px;padding:7px 10px}.tag{margin-left:auto;font-size:.72rem;letter-spacing:.12em;color:#b8c7da}.hero{padding-top:34px;max-width:650px}.hero h1{font-size:clamp(2rem,6vw,3.5rem);line-height:1.06;letter-spacing:-.04em;margin:0 0 14px}.hero p{color:#d2ddec;margin:0;font-size:1.05rem}.main{max-width:980px;margin:-20px auto 0;padding:0 16px 42px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.tab{border:1px solid var(--line);background:white;border-radius:999px;padding:10px 15px;font:inherit;cursor:pointer}.tab[aria-selected=true]{background:var(--navy);color:white;border-color:var(--navy)}.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:clamp(18px,4vw,30px);box-shadow:0 8px 28px #10233f0a}.panel h2{margin:0 0 5px;font-size:1.45rem}.sub{color:var(--muted);margin:0 0 22px}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{display:flex;flex-direction:column;gap:7px;font-weight:650}.field input,.field textarea,.field select{width:100%;border:1px solid #cbd5e1;border-radius:10px;padding:12px 13px;font:inherit;color:var(--ink);background:white}.field textarea{min-height:150px;resize:vertical}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer;background:var(--navy);color:white}.btn.secondary{background:#edf2f7;color:var(--navy)}.result{margin-top:18px;border-radius:12px;background:#eafff7;border:1px solid #b8f4de;padding:15px;display:none}.result strong{font-size:1.3rem}.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.stat{background:#f1f5f9;border-radius:10px;padding:10px 13px}.stat b{display:block;font-size:1.15rem}.note{color:var(--muted);font-size:.9rem;margin-top:20px}.hidden{display:none}footer{text-align:center;color:var(--muted);font-size:.88rem;padding:0 16px 30px}a{color:inherit}
+@media(max-width:600px){.fields{grid-template-columns:1fr}.tag{font-size:.62rem}.hero{padding-top:28px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="nav"><span class="logo">⚡</span><span>QuickKit</span><span class="tag">FREE ONLINE TOOLS</span></div>
+  <section class="hero"><h1>Small tools.<br>Big convenience.</h1><p>Useful tools for everyday tasks. Free, fast, and easy to use — right in your browser.</p></section>
+</div></header>
+<main class="main">
+  <nav class="tabs" aria-label="Choose a tool">
+    <button class="tab" aria-selected="true" data-tab="percent">Percentage calculator</button>
+    <button class="tab" aria-selected="false" data-tab="words">Word counter</button>
+    <button class="tab" aria-selected="false" data-tab="units">Unit converter</button>
+  </nav>
+  <section class="panel" id="percent">
+    <h2>Percentage calculator</h2><p class="sub">Calculate percentages, marks, and discounts in seconds.</p>
+    <div class="fields">
+      <label class="field">What percentage? (%)<input id="pct" type="number" inputmode="decimal" placeholder="e.g. 20"></label>
+      <label class="field">Of what number?<input id="base" type="number" inputmode="decimal" placeholder="e.g. 500"></label>
+    </div>
+    <div class="actions"><button class="btn" id="calcPct">Calculate</button><button class="btn secondary" id="clearPct">Clear</button></div>
+    <div class="result" id="pctResult" aria-live="polite"></div>
+    <p class="note">Example: 20% of 500 = 100. Your inputs are processed on your device.</p>
+  </section>
+  <section class="panel hidden" id="words">
+    <h2>Word counter</h2><p class="sub">Count words, characters, and sentences in your text.</p>
+    <label class="field">Paste or type your text<textarea id="textInput" placeholder="Start typing here..."></textarea></label>
+    <div class="stats" aria-live="polite">
+      <div class="stat"><b id="wordCount">0</b>Words</div><div class="stat"><b id="charCount">0</b>Characters</div><div class="stat"><b id="noSpaceCount">0</b>Without spaces</div><div class="stat"><b id="sentenceCount">0</b>Sentences</div>
+    </div>
+    <div class="actions"><button class="btn secondary" id="clearText">Clear text</button></div>
+    <p class="note">Your text stays in your browser and is not uploaded by this tool.</p>
+  </section>
+  <section class="panel hidden" id="units">
+    <h2>Unit converter</h2><p class="sub">Convert common length, weight, and temperature units.</p>
+    <div class="fields">
+      <label class="field">Category<select id="category"><option value="length">Length</option><option value="weight">Weight / mass</option><option value="temp">Temperature</option></select></label>
+      <label class="field">Value<input id="unitValue" type="number" inputmode="decimal" placeholder="Enter a value" value="1"></label>
+      <label class="field">From<select id="fromUnit"></select></label>
+      <label class="field">To<select id="toUnit"></select></label>
+    </div>
+    <div class="actions"><button class="btn" id="convert">Convert</button><button class="btn secondary" id="swap">Swap units</button></div>
+    <div class="result" id="unitResult" aria-live="polite"></div>
+    <p class="note">Conversions use standard metric and imperial relationships.</p>
+  </section>
+  <p class="note">QuickKit is an independent project. Results are intended for everyday use; check important calculations when accuracy is critical.</p>
+</main>
+<footer>© <span id="year"></span> QuickKit · Free tools, made simple</footer>
+<script>
+const tabs=[...document.querySelectorAll('.tab')];
+tabs.forEach(t=>t.addEventListener('click',()=>{tabs.forEach(b=>b.setAttribute('aria-selected',String(b===t)));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('hidden',p.id!==t.dataset.tab));}));
+const fmt=n=>Number.isFinite(n)?n.toLocaleString(undefined,{maximumFractionDigits:8}):'—';
+document.getElementById('calcPct').addEventListener('click',()=>{const p=Number(document.getElementById('pct').value),b=Number(document.getElementById('base').value),r=document.getElementById('pctResult');if(document.getElementById('pct').value===''||document.getElementById('base').value===''||!Number.isFinite(p)||!Number.isFinite(b)){r.style.display='block';r.textContent='Please enter both numbers.';return}r.style.display='block';r.innerHTML='<span>Result</span><br><strong>'+fmt(p/100*b)+'</strong><br>'+fmt(p)+'% of '+fmt(b)+' = '+fmt(p/100*b);});
+document.getElementById('clearPct').addEventListener('click',()=>{document.getElementById('pct').value='';document.getElementById('base').value='';document.getElementById('pctResult').style.display='none';});
+const textInput=document.getElementById('textInput');function countText(){const s=textInput.value.trim(),words=s?s.split(/\s+/u).length:0,sentences=(s.match(/[.!?]+(?=\s|$)/g)||[]).length;document.getElementById('wordCount').textContent=words;document.getElementById('charCount').textContent=textInput.value.length;document.getElementById('noSpaceCount').textContent=textInput.value.replace(/\s/g,'').length;document.getElementById('sentenceCount').textContent=sentences;}textInput.addEventListener('input',countText);document.getElementById('clearText').addEventListener('click',()=>{textInput.value='';countText();});
+const units={length:{m:1,km:1000,cm:.01,mm:.001,mi:1609.344,yd:.9144,ft:.3048,in:.0254},weight:{kg:1,g:.001,mg:.000001,lb:.45359237,oz:.028349523125},temp:{C:'C',F:'F',K:'K'}};
+const labels={m:'Meters (m)',km:'Kilometers (km)',cm:'Centimeters (cm)',mm:'Millimeters (mm)',mi:'Miles (mi)',yd:'Yards (yd)',ft:'Feet (ft)',in:'Inches (in)',kg:'Kilograms (kg)',g:'Grams (g)',mg:'Milligrams (mg)',lb:'Pounds (lb)',oz:'Ounces (oz)',C:'Celsius (°C)',F:'Fahrenheit (°F)',K:'Kelvin (K)'};
+const cat=document.getElementById('category'),from=document.getElementById('fromUnit'),to=document.getElementById('toUnit');
+function populate(){const keys=Object.keys(units[cat.value]);from.innerHTML='';to.innerHTML='';keys.forEach(k=>{from.add(new Option(labels[k],k));to.add(new Option(labels[k],k));});if(keys.length>1)to.selectedIndex=1;document.getElementById('unitResult').style.display='none';}
+cat.addEventListener('change',populate);
+function toBase(v,u,c){if(c==='temp')return u==='C'?v:u==='F'?(v-32)*5/9:v-273.15;return v*units[c][u]}
+function fromBase(v,u,c){if(c==='temp')return u==='C'?v:u==='F'?v*9/5+32:v+273.15;return v/units[c][u]}
+document.getElementById('convert').addEventListener('click',()=>{const raw=document.getElementById('unitValue').value,r=document.getElementById('unitResult');if(raw===''||!Number.isFinite(Number(raw))){r.style.display='block';r.textContent='Please enter a valid number.';return}const v=Number(raw),base=toBase(v,from.value,cat.value),out=fromBase(base,to.value,cat.value);r.style.display='block';r.innerHTML='<span>Converted result</span><br><strong>'+fmt(out)+' '+to.value+'</strong><br>'+fmt(v)+' '+from.value+' = '+fmt(out)+' '+to.value;});
+document.getElementById('swap').addEventListener('click',()=>{const old=from.value;from.value=to.value;to.value=old;document.getElementById('convert').click();});
+populate();document.getElementById('year').textContent=new Date().getFullYear();document.getElementById('convert').click();
+</script>
+</body>
+</html>
